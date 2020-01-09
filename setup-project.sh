@@ -31,7 +31,7 @@ printf "import setuptools\nwith open(\"README.md\",\"r\") as fh:\n\tlong_descrip
 printf "#!/usr/bin/env python\nimport $setupName" > $bin_dir"/"$setupName
 
 # Create Anaconda meta.yaml
-printf "package:\n\tname: $setupName\n\tversion: $setupVersion\n\nsource:\n\tpath= ./$setupName/n/nrequirements:\n\tbuild:\n\t\t- python\n\t\t- setuptools\n\n\trun:\n\t\t- python\n\nabout:\n\thome: $setupUrl" >  "$dir/anaconda_build/$setupName/meta.yaml"
+printf "package:\n  name: $setupName\n  version: $setupVersion\n\nsource:\n  path= ./$setupName\n\nrequirements:\n  build:\n    - python\n    - setuptools\n\n  run:\n    - python\n\nabout:\n  home: $setupUrl" >  "$dir/anaconda_build/$setupName/meta.yaml"
 
 # Clean the directory of this project
 rm $dir"/setup-project.sh"
