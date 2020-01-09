@@ -17,6 +17,7 @@ old_name_project=`find * -type d -not -name "bin"`
 
 # Check for missing directories
 [ ! -d $bin_dir ] && mkdir $bin_dir
+[ ! -d "$dir/anaconda_build" ] && mkdir "$dir/anaconda_build"
 [ ! -d "$dir/anaconda_build/$setupName" ] && mkdir "$dir/anaconda_build/$setupName" && mv "$dir/bld.bat" "$dir/anaconda_build/$setupName/bld.bat" && mv "$dir/build.sh" "$dir/anaconda_build/$setupName/build.sh"
 
 # Move old package to new package folder
@@ -30,7 +31,7 @@ printf "import setuptools\nwith open(\"README.md\",\"r\") as fh:\n\tlong_descrip
 printf "#!/usr/bin/env python\nimport $setupName" > $bin_dir"/"$setupName
 
 # Create Anaconda meta.yaml
-printf "package:\n\tname: $setupName\n\tversion: $setupVersion\n\nsource:\n\tpath= ./$setupName/n/nrequirements:\n\tbuild:\n\t\t- python\n\t\t- setuptools\n\n\trun:\n\t\t- python\n\nabout:\n\thome: $setupUrl" >  "$dir/anaconda_build//$setupName/meta.yaml"
+printf "package:\n\tname: $setupName\n\tversion: $setupVersion\n\nsource:\n\tpath= ./$setupName/n/nrequirements:\n\tbuild:\n\t\t- python\n\t\t- setuptools\n\n\trun:\n\t\t- python\n\nabout:\n\thome: $setupUrl" >  "$dir/anaconda_build/$setupName/meta.yaml"
 
 # Clean the directory of this project
 rm $dir"/setup-project.sh"
