@@ -2,7 +2,7 @@
 setupName=$(git config --local remote.origin.url|sed -n 's#.*/\([^.]*\)\.git#\1#p')
 setupVersion="0.1"
 setupAuthor=$(git config user.name)
-setupEmail=$(git config user.name)
+setupEmail=$(git config user.email)
 setupUrl=$(git remote get-url origin)
 setupDescription=$(python get-project-short-description.py $setupUrl)
 
@@ -27,6 +27,9 @@ printf "import setuptools\nwith open(\"README.md\",\"r\") as fh:\n\tlong_descrip
 
 # Create bin script
 printf "#!/usr/bin/env python\nimport $setupName" > $bin_dir"/"$setupName
+
+# Create Anaconda meta.yaml
+printf "package:\n\tname: $setupName\n\tversion: $setupVersion\n\nsource:\n\tpath= ./$setupName/n/nrequirements:\n\tbuild:\n\t\t- python\n\t\t- setuptools\n\n\trun:\n\t\t- python\n\nabout:\n\thome: $setupUrl" > meta.yaml
 
 # Clean the directory of this project
 rm $dir"/setup-project.sh"
